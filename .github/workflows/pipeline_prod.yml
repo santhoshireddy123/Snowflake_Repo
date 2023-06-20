@@ -8,8 +8,7 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    env:
-      ENVIRONMENT: production
+    environment: production
       SNOWFLAKE_ACCOUNT_ENV: ${{ secrets.SNOWFLAKE_ACCOUNT_ENV }}
       SNOWFLAKE_USER_ENV: ${{ secrets.SNOWFLAKE_USER_ENV }}
       SNOWFLAKE_PASSWORD_ENV: ${{ secrets.SNOWFLAKE_PASSWORD_ENV }}
