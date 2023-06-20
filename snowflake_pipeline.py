@@ -2,19 +2,19 @@ import os
 import snowflake.connector
 
 conn = snowflake.connector.connect(
-        user=os.environ["SNOWFLAKE_USER"],
-        password=os.environ["SNOWFLAKE_PASSWORD"],
-        account=os.environ["SNOWFLAKE_ACCOUNT"],
-        role=os.environ["SNOWFLAKE_ROLE"],
-        warehouse=os.environ["SNOWFLAKE_WAREHOUSE"],
-        database=os.environ["SNOWFLAKE_DATABASE"],
-        schema=os.environ["SNOWFLAKE_SCHEMA"],
+        user=os.environ["SNOWFLAKE_USER_ENV"],
+        password=os.environ["SNOWFLAKE_PASSWORD_ENV"],
+        account=os.environ["SNOWFLAKE_ACCOUNT_ENV"],
+        role=os.environ["SNOWFLAKE_ROLE_ENV"],
+        warehouse=os.environ["SNOWFLAKE_WAREHOUSE_ENV"],
+        database=os.environ["SNOWFLAKE_DATABASE_ENV"],
+        schema=os.environ["SNOWFLAKE_SCHEMA_ENV"],
     )
 
 
-warehouse = os.environ["SNOWFLAKE_WAREHOUSE"]
-database = os.environ["SNOWFLAKE_DATABASE"]
-schema = os.environ["SNOWFLAKE_SCHEMA"]
+warehouse = os.environ["SNOWFLAKE_WAREHOUSE_ENV"]
+database = os.environ["SNOWFLAKE_DATABASE_ENV"]
+schema = os.environ["SNOWFLAKE_SCHEMA_ENV"]
 
 def run_query(connection, query):
     cursor = connection.cursor()
@@ -34,7 +34,7 @@ def snowflake_context(warehouse, database, schema):
 snowflake_context(warehouse,database,schema)
 
 
-sql = 'create or replace table employee (id integer,name varchar);'
+sql = 'create or replace table employe (id integer,name varchar);'
 run_query(conn, sql)
 
 
