@@ -25,12 +25,12 @@ jobs:
 
     - name: Run SQL scripts and deploy to Snowflake
       env:
-        SNOWFLAKE_ACCOUNT_ENV: ${{ secrets.SNOWFLAKE_ACCOUNT_ENV }}
-        SNOWFLAKE_USER_ENV: ${{ secrets.SNOWFLAKE_USER_ENV }}
-        SNOWFLAKE_PASSWORD_ENV: ${{ secrets.SNOWFLAKE_PASSWORD_ENV }}
-        SNOWFLAKE_ROLE_ENV: ${{ secrets.SNOWFLAKE_ROLE_ENV }}
-        SNOWFLAKE_WAREHOUSE_ENV: ${{ secrets.SNOWFLAKE_WAREHOUSE_ENV }}
-        SNOWFLAKE_DATABASE_ENV: ${{ secrets.SNOWFLAKE_DATABASE_ENV }}
-        SNOWFLAKE_SCHEMA_ENV: ${{ secrets.SNOWFLAKE_SCHEMA_ENV }}
+        SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+        SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+        SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+        SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
+        SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
+        SNOWFLAKE_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
+        SNOWFLAKE_SCHEMA: ${{ secrets.SNOWFLAKE_SCHEMA }}
       run: |
         python snowflake_pipeline.py
