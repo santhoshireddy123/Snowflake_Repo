@@ -11,6 +11,7 @@ conn = snowflake.connector.connect(
         schema=os.environ["SNOWFLAKE_SCHEMA"],
     )
 
+
 warehouse = os.environ["SNOWFLAKE_WAREHOUSE"]
 database = os.environ["SNOWFLAKE_DATABASE"]
 schema = os.environ["SNOWFLAKE_SCHEMA"]
@@ -33,7 +34,10 @@ def snowflake_context(warehouse, database, schema):
 snowflake_context(warehouse,database,schema)
 
 
-sql = 'create or replace table customer_check (id integer,name varchar)'
+sql = '''create or replace schema demo_schema;
+         use schema demo_schema;
+create or replace table customer_check (id integer,name varchar);
+'''
 run_query(conn, sql)
 
 
