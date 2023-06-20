@@ -34,7 +34,7 @@ def snowflake_context(warehouse, database, schema):
 snowflake_context(warehouse,database,schema)
 
 
-sql = 'create or replace table employe (id integer,name varchar);'
+sql = 'create or replace table emp (id integer,name varchar);'
 run_query(conn, sql)
 
 
