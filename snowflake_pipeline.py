@@ -34,10 +34,10 @@ def snowflake_context(warehouse, database, schema):
 snowflake_context(warehouse,database,schema)
 
 
-sql = `create or replace schema demo_schema;
+sql = """create or replace schema demo_schema;
          use schema demo_schema;
 create or replace table customer_check (id integer,name varchar);
-`
+"""
 run_query(conn, sql)
 
 
