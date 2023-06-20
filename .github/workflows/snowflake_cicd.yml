@@ -1,4 +1,4 @@
-name: Snowflake CI/CD
+name: Snowflake CI/CD Pipeline
 
 on:
   push:
