@@ -10,6 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ENVIRONMENT: production
+      SNOWFLAKE_ACCOUNT_ENV: ${{ secrets.SNOWFLAKE_ACCOUNT_ENV }}
+      SNOWFLAKE_USER_ENV: ${{ secrets.SNOWFLAKE_USER_ENV }}
+      SNOWFLAKE_PASSWORD_ENV: ${{ secrets.SNOWFLAKE_PASSWORD_ENV }}
+      SNOWFLAKE_DATABASE_ENV: ${{ secrets.SNOWFLAKE_DATABASE_ENV }}
+      SNOWFLAKE_SCHEMA_ENV: ${{ secrets.SNOWFLAKE_SCHEMA_ENV }}
+      SNOWFLAKE_WAREHOUSE_ENV: ${{ secrets.SNOWFLAKE_WAREHOUSE_ENV }}
+      SNOWFLAKE_ROLE_ENV: ${{ secrets.SNOWFLAKE_ROLE_ENV }}
 
     steps:
     - name: Check out repository
@@ -26,13 +33,5 @@ jobs:
         pip install snowflake-connector-python
 
     - name: Run SQL scripts and deploy to Snowflake
-      env:
-        SNOWFLAKE_ACCOUNT_ENV: ${{ secrets.SNOWFLAKE_ACCOUNT_ENV }}
-        SNOWFLAKE_USER_ENV: ${{ secrets.SNOWFLAKE_USER_ENV }}
-        SNOWFLAKE_PASSWORD_ENV: ${{ secrets.SNOWFLAKE_PASSWORD_ENV }}
-        SNOWFLAKE_ROLE_ENV: ${{ secrets.SNOWFLAKE_ROLE_ENV }}
-        SNOWFLAKE_WAREHOUSE_ENV: ${{ secrets.SNOWFLAKE_WAREHOUSE_ENV }}
-        SNOWFLAKE_DATABASE_ENV: ${{ secrets.SNOWFLAKE_DATABASE_ENV }}
-        SNOWFLAKE_SCHEMA_ENV: ${{ secrets.SNOWFLAKE_SCHEMA_ENV }}
       run: |
         python snowflake_pipeline.py
