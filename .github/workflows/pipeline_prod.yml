@@ -8,9 +8,8 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    env:
-      ENVIRONMENT: production
-
+    environment: production
+    
     steps:
     - name: Check out repository
       uses: actions/checkout@v2
