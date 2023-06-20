@@ -33,7 +33,7 @@ def snowflake_context(warehouse, database, schema):
 snowflake_context(warehouse,database,schema)
 
 
-sql = 'create or replace table customer_incremental (id integer,name varchar)'
+sql = 'create or replace table customer_check (id integer,name varchar)'
 run_query(conn, sql)
 
 
