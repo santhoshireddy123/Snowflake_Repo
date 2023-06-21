@@ -1,0 +1,21 @@
+name: Run SQL script
+
+on: [push]
+
+jobs:
+  run_sql:
+    name: Run SQL script
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup SnowSQL
+        uses: snowflakedb/snowsql-actions@v1
+        with:
+          host: <snowflake_account_name>
+          username: <snowflake_username>
+          password: <snowflake_password>
+          database: <snowflake_database_name>
+          schema: <snowflake_schema_name>
+      - name: Run SQL script
+        run: snowsql -c ./sql_script.sql
