@@ -1,1 +1,0 @@
-Create or replace table customer_Dim (id integer, name varchar);
