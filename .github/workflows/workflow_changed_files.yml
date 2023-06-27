@@ -49,6 +49,6 @@ jobs:
         CHANGED_SQL_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         
       run: |
-        echo "List all the files that have changed: ${{changed_sql_files}}"
+        echo "List all the files that have changed: ${{CHANGED_SQL_FILES}}"
         python pipeline_changed_files.py
         
