@@ -21,7 +21,9 @@ with connect(
    ) as connection:
     for sql_file in changed_sql_files:
         with open(sql_file, 'r') as f:
-            sql = f.read()
+            sql = f.read().split(';')
+            for sql_command in sql:
+                if sql_command.strip():
+                    connection.cursor().execute(sql_command)
             print(f'Executing {sql_file}...')
-            connection.cursor().execute(sql)
             print(f'Successfully executed {sql_file}')
