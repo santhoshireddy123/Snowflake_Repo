@@ -3,10 +3,10 @@ name: Snowflake changed files
 on:
   push:
     paths:
-      - 'sql_scripts/**/*.sql'      
+      - 'sql_scripts/*.sql'      
   pull_request:
     paths:
-      - 'sql_scripts/**/*.sql'
+      - 'sql_scripts/*.sql'
 
 jobs:
   execute_sql:
@@ -32,7 +32,7 @@ jobs:
       id: changed-files-specific
       uses: tj-actions/changed-files@v37
       with:
-          files: sql_scripts/*.{sql}
+          files: sql_scripts/*.sql
   
     - name: Run step if any file(s) in the docs folder change
       if: steps.changed-files-specific.outputs.any_changed == 'true'
