@@ -46,7 +46,7 @@ jobs:
         SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
         SNOWFLAKE_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
         SNOWFLAKE_SCHEMA: ${{ secrets.SNOWFLAKE_SCHEMA }}
-        CHANGED_SQL_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
+        CHANGED_SQL_FILES:  steps.changed-files.outputs.all_changed_files
         
       run: |
         echo "List all the files that have changed: ${{CHANGED_SQL_FILES}}"
