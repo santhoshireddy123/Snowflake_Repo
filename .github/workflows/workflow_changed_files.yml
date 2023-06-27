@@ -28,12 +28,19 @@ jobs:
         python -m pip install --upgrade pip
         pip install snowflake-connector-python
 
+       
     - name: Get changed files in the sql_scripts folder
       id: changed-files-specific
       uses: tj-actions/changed-files@v37
       with:
           files: sql_scripts/*.sql
   
+    - name: Get changed .sql files
+      id: get_changed_sql
+      run: |
+        echo "changed_sql_files<<EOF" >> $GITHUB_ENV ${{ steps.changed-files.outputs.all_changed_files }}
+        echo "EOF" >> $GITHUB_ENV
+    
     - name: Run step if any file(s) in the docs folder change
       if: steps.changed-files-specific.outputs.any_changed == 'true'
       env:
@@ -44,7 +51,7 @@ jobs:
         SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
         SNOWFLAKE_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
         SNOWFLAKE_SCHEMA: ${{ secrets.SNOWFLAKE_SCHEMA }}
-        changed_sql_files: ${{ steps.changed-files.outputs.all_changed_files }}
+        
       run: |
         echo "List all the files that have changed: ${{ steps.changed-files-specific.outputs.all_changed_files }}"
         python pipeline_changed_files.py
