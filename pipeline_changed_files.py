@@ -8,7 +8,7 @@ role = os.environ['SNOWFLAKE_ROLE']
 warehouse = os.environ['SNOWFLAKE_WAREHOUSE']
 database = os.environ['SNOWFLAKE_DATABASE']
 schema = os.environ['SNOWFLAKE_SCHEMA']
-changed_sql_files = os.environ['CHANGED_SQL_FILES']
+changed_sql_files = os.environ['CHANGED_SQL_FILES'].split(' ')
 
 
 with connect(
@@ -20,6 +20,7 @@ with connect(
     database=database,
     schema=schema,
    ) as connection:
+  
     for sql_file in changed_sql_files:
         print(sql_file)
         # with open(sql_file, 'r') as f:
