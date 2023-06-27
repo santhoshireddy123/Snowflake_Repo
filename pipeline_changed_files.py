@@ -8,7 +8,7 @@ role = os.environ['SNOWFLAKE_ROLE']
 warehouse = os.environ['SNOWFLAKE_WAREHOUSE']
 database = os.environ['SNOWFLAKE_DATABASE']
 schema = os.environ['SNOWFLAKE_SCHEMA']
-changed_sql_files = os.environ['CHANGED_SQL_FILES']
+changed_sql_files = os.environ['steps.changed-files.outputs.all_changed_files']
 
 
 with connect(
