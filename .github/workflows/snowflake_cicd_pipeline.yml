@@ -31,7 +31,7 @@ jobs:
     - name: Get changed .sql files
       id: get_changed_sql
       run: |
-        echo "changed_sql_files" >> $GITHUB_ENV
+        echo "changed_sql_files<<EOF" >> $GITHUB_ENV
         git diff --name-only --diff-filter=d ${{ github.event.before }} ${{ github.sha }} -- sql_scripts/**/*.sql | xargs -I {} echo {} | xargs
         echo "EOF" >> $GITHUB_ENV
 
