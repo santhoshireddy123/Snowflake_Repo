@@ -45,6 +45,7 @@ jobs:
         SNOWFLAKE_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
         SNOWFLAKE_SCHEMA: ${{ secrets.SNOWFLAKE_SCHEMA }}
         changed_sql_files: ${{ steps.changed-files.outputs.all_changed_files }}
-      run: |   
+      run: |
+        echo "List all the files that have changed: ${{ steps.changed-files-specific.outputs.all_changed_files }}"
         python pipeline_changed_files.py
         
