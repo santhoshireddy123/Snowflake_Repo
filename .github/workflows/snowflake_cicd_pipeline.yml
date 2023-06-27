@@ -32,7 +32,7 @@ jobs:
       id: get_changed_sql
       run: |
         echo "changed_sql_files<<EOF" >> $GITHUB_ENV
-        git diff --name-only --diff-filter=AM ${{ github.event.before }} ${{ github.sha }} -- sql_scripts/**/*.sql | xargs -I {} echo {} | xargs
+        git diff --name-only --diff-filter=d ${{ github.event.before }} ${{ github.sha }} -- sql_scripts/**/*.sql | xargs -I {} echo {} | xargs
         echo "EOF" >> $GITHUB_ENV
 
     - name: Execute .sql files on Snowflake
