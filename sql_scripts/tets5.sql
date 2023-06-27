@@ -1,1 +1,1 @@
-create or replace table test(id integer,name varchar);
+create or replace table test_demo(id integer,name varchar);
