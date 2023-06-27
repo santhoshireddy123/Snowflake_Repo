@@ -39,6 +39,7 @@ jobs:
     - name: Run step if any file(s) in the docs folder change
       if: steps.changed-files-specific.outputs.any_changed == 'true'
       env:
+        CHANGED_SQL_FILES: steps.changed-files.outputs.all_changed_files
         SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
         SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
         SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
@@ -46,9 +47,8 @@ jobs:
         SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
         SNOWFLAKE_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
         SNOWFLAKE_SCHEMA: ${{ secrets.SNOWFLAKE_SCHEMA }}
-        CHANGED_SQL_FILES:  steps.changed-files.outputs.all_changed_files
-        
+               
       run: |
-        echo "List all the files that have changed: ${{CHANGED_SQL_FILES}}"
+        echo "List all the files that have changed: ${{steps.changed-files.outputs.all_changed_files}}"
         python pipeline_changed_files.py
         
