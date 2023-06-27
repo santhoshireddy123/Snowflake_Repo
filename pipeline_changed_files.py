@@ -22,8 +22,8 @@ with connect(
    ) as connection:
   
     for sql_file in changed_sql_files:
-        print(sql_file)
-        # with open(sql_file, 'r') as f:
+        with open(sql_file, 'r') as f:
+            print(f.read())
         #     sql = f.read().split(';')
         #     for sql_command in sql:
         #         if sql_command.strip():
