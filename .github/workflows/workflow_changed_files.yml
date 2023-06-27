@@ -1,0 +1,50 @@
+name: Snowflake changed files
+
+on:
+  push:
+    paths:
+      - 'sql_scripts/**/*.sql'      
+  pull_request:
+    paths:
+      - 'sql_scripts/**/*.sql'
+
+jobs:
+  execute_sql:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0 # Fetch all history to get the list of changed files
+
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install snowflake-connector-python
+
+    - name: Get changed files in the sql_scripts folder
+      id: changed-files-specific
+      uses: tj-actions/changed-files@v37
+      with:
+          files: sql_scripts/*.{sql}
+  
+    - name: Run step if any file(s) in the docs folder change
+      if: steps.changed-files-specific.outputs.any_changed == 'true'
+      env:
+        SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+        SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+        SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+        SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
+        SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
+        SNOWFLAKE_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
+        SNOWFLAKE_SCHEMA: ${{ secrets.SNOWFLAKE_SCHEMA }}
+        changed_sql_files: ${{ steps.changed-files.outputs.all_changed_files }}
+      run: |   
+        python pipeline_changed_files.py
+        
